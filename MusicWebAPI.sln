@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicWebAPI", "MusicWebAPI\MusicWebAPI.csproj", "{881D5898-B307-485D-91B1-0B20E3AE4B87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicClassLibrary", "MusicClassLibrary\MusicClassLibrary.csproj", "{2C7DB57E-7D95-4316-9B5E-BD7EFEA99681}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{881D5898-B307-485D-91B1-0B20E3AE4B87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{881D5898-B307-485D-91B1-0B20E3AE4B87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{881D5898-B307-485D-91B1-0B20E3AE4B87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{881D5898-B307-485D-91B1-0B20E3AE4B87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C7DB57E-7D95-4316-9B5E-BD7EFEA99681}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C7DB57E-7D95-4316-9B5E-BD7EFEA99681}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C7DB57E-7D95-4316-9B5E-BD7EFEA99681}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C7DB57E-7D95-4316-9B5E-BD7EFEA99681}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {83999769-8EC5-466A-AFF0-258872113960}
+	EndGlobalSection
+EndGlobal
