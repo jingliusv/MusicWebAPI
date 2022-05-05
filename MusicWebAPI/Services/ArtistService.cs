@@ -5,8 +5,8 @@ namespace MusicWebAPI.Services
     public interface IArtistService
     {
         Task<Artist> CreateAsync(ArtistForm artist);
-        Task<ArtistEntity> GetByNameAsync(string name);
-        Task<ArtistEntity> GetByIdAsync(int id);
+        Task<ArtistDto> GetByNameAsync(string name);
+        Task<ArtistDto> GetByIdAsync(int id);
         Task<IEnumerable<ArtistEntity>> GetAllAsync();
         Task<Artist> UpdateAsync(int id, ArtistForm artist);
         Task<Artist> DeleteAsync(int id);
@@ -54,20 +54,20 @@ namespace MusicWebAPI.Services
             return await _context.Artists.Include(a => a.Albums).ToListAsync();
         }
 
-        public async Task<ArtistEntity> GetByIdAsync(int id)
+        public async Task<ArtistDto> GetByIdAsync(int id)
         {           
             var artistEntity = await _context.Artists.Include(a => a.Albums).Where(a => a.Id == id).FirstOrDefaultAsync(a => a.Id == id); ;
             if (artistEntity != null)
-                return artistEntity;
+                return _mapper.Map<ArtistDto>(artistEntity);
 
             return null!;
         }
 
-        public async Task<ArtistEntity> GetByNameAsync(string name)
+        public async Task<ArtistDto> GetByNameAsync(string name)
         {
             var artistEntity = await _context.Artists.Include(a => a.Albums).Where(a => a.Name == name).FirstOrDefaultAsync(a => a.Name.ToLower() == name.ToLower());
             if (artistEntity != null)
-                return artistEntity;
+                return _mapper.Map<ArtistDto>(artistEntity);
 
             return null!;
         }

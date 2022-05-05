@@ -25,6 +25,7 @@ builder.Services.AddControllersWithViews()
 builder.Services.AddAutoMapper(typeof(Program));
 // add services
 builder.Services.AddScoped<IArtistService, ArtistService>();
+builder.Services.AddScoped<IAlbumService, AlbumService>();
 
 
 var app = builder.Build();
