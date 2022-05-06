@@ -20,6 +20,16 @@
             CreateMap<AlbumEntity, AlbumDto>()
                 .ForMember(des => des.ArtistName, source => source.MapFrom(a => a.Artist.Name))
                 .ReverseMap();
+
+            // mapping for song
+            CreateMap<SongEntity, Song>()
+                .ReverseMap();
+            CreateMap<SongForm, SongEntity>()
+                .ReverseMap();
+            CreateMap<SongEntity, SongDto>()
+                .ForMember(des => des.AlbumName, source => source.MapFrom(s => s.Album.Name))
+                .ForMember(des => des.ArtistName, source => source.MapFrom(s => s.Artist.Name))
+                .ReverseMap();
         }
     }
 }

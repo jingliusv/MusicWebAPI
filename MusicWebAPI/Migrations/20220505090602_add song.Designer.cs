@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MusicWebAPI.Data;
 
@@ -10,9 +11,10 @@ using MusicWebAPI.Data;
 namespace MusicWebAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220505090602_add song")]
+    partial class addsong
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -172,48 +174,6 @@ namespace MusicWebAPI.Migrations
                     b.HasIndex("ArtistId");
 
                     b.ToTable("Songs");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AlbumId = 4,
-                            ArtistId = 1,
-                            Length = "3:09",
-                            Name = "Memories"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AlbumId = 4,
-                            ArtistId = 1,
-                            Length = "2:52",
-                            Name = "Lost"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AlbumId = 6,
-                            ArtistId = 3,
-                            Length = "5:26",
-                            Name = "Suit & Tie"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AlbumId = 3,
-                            ArtistId = 2,
-                            Length = "4:05",
-                            Name = "Between the Lines"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AlbumId = 1,
-                            ArtistId = 5,
-                            Length = "4:48",
-                            Name = "Boogie Wonderland"
-                        });
                 });
 
             modelBuilder.Entity("MusicClassLibrary.Entities.AlbumEntity", b =>

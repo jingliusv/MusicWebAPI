@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MusicClassLibrary.Entities
 {
@@ -10,6 +11,9 @@ namespace MusicClassLibrary.Entities
         public string Name { get; set; } = string.Empty;
         [Required]
         public int ArtistId { get; set; }
-        public ArtistEntity Artist { get; set; } = null!;       
+        public ArtistEntity Artist { get; set; } = null!;      
+        public ICollection<SongEntity> Songs { get; set; } = new List<SongEntity>();
+        [NotMapped]
+        public int NumOfSongs { get { return Songs.Count; } }
     }
 }

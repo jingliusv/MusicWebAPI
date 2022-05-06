@@ -12,9 +12,24 @@
 
         public DbSet<ArtistEntity> Artists { get; set; } = null!;
         public DbSet<AlbumEntity> Albums { get; set; } = null!;
+        public DbSet<SongEntity> Songs { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // SongEntity har två FK Key
+            modelBuilder.Entity<SongEntity>()
+              .HasOne(x => x.Artist)
+              .WithMany(x => x.Songs)
+              .HasForeignKey(x => x.ArtistId)
+              .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<SongEntity>()
+                .HasOne(x => x.Album)
+                .WithMany(x => x.Songs)
+                .HasForeignKey(x => x.AlbumId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+           
             #region Artist Data
             modelBuilder.Entity<ArtistEntity>().HasData(
                 new ArtistEntity
@@ -106,7 +121,48 @@
             #endregion
 
             #region Song Data
-
+            modelBuilder.Entity<SongEntity>().HasData(
+                new SongEntity
+                {
+                    Id = 1,
+                    Name = "Memories",
+                    Length = "3:09",
+                    AlbumId = 4,
+                    ArtistId = 1
+                },
+                new SongEntity
+                {
+                    Id = 2,
+                    Name = "Lost",
+                    Length = "2:52",
+                    AlbumId = 4,
+                    ArtistId = 1
+                },
+                new SongEntity
+                {
+                    Id = 3,
+                    Name = "Suit & Tie",
+                    Length = "5:26",
+                    AlbumId = 6,
+                    ArtistId = 3
+                },
+                new SongEntity
+                {
+                    Id = 4,
+                    Name = "Between the Lines",
+                    Length = "4:05",
+                    AlbumId = 3,
+                    ArtistId = 2
+                },
+                new SongEntity
+                {
+                    Id = 5,
+                    Name = "Boogie Wonderland",
+                    Length = "4:48",
+                    AlbumId = 1,
+                    ArtistId = 5
+                }
+            );
             #endregion
         }
 

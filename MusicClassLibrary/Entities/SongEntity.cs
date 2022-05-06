@@ -1,22 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MusicClassLibrary.Entities
 {
-    public class ArtistEntity
+    public class SongEntity
     {
         [Key]
         public int Id { get; set; }
         [Required]
         public string Name { get; set; } = string.Empty;
-        public ICollection<AlbumEntity> Albums { get; set; } = new List<AlbumEntity>();
-        [NotMapped]
-        public int NumOfAlbums { get { return Albums.Count; } }
-        public ICollection<SongEntity> Songs { get; set; } = new List<SongEntity>();
+        [Required]
+        public string Length { get; set; } = string.Empty;
+        [Required]
+        public int AlbumId { get; set; }
+        public AlbumEntity Album { get; set; } = null!;
+        [Required]
+        public int ArtistId { get; set; }
+        public ArtistEntity Artist { get; set; } = null!;
     }
 }

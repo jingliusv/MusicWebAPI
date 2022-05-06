@@ -51,7 +51,9 @@ namespace MusicWebAPI.Services
 
         public async Task<IEnumerable<ArtistEntity>> GetAllAsync()
         {
-            return await _context.Artists.Include(a => a.Albums).ToListAsync();
+            return await _context.Artists
+                .Include(a => a.Albums)
+                .ToListAsync();
         }
 
         public async Task<ArtistDto> GetByIdAsync(int id)
