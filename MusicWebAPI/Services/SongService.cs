@@ -39,7 +39,7 @@ namespace MusicWebAPI.Services
                 await _context.SaveChangesAsync();
                 return _mapper.Map<Song>(songCreate);
             }
-            return null!;
+            throw new ApplicationException("Det finns en sång som har samma namn.");
         }
 
         public async Task<IEnumerable<SongDto>> GetAllAsync()
@@ -56,7 +56,7 @@ namespace MusicWebAPI.Services
             if(song != null) 
                 return _mapper.Map<SongDto>(song);
 
-            return null!;
+            throw new KeyNotFoundException($"Tyvärr, vi kunde inte hitta sången med Id nummer {id}.");
         }
 
         public async Task<Song> UpdateAsync(int id, SongForm song)
@@ -64,7 +64,7 @@ namespace MusicWebAPI.Services
             // kolla om albumet som finns
             var album = await _albumService.GetByIdAsync(song.AlbumId);
             // kolla om sång finns
-            var songEntity = await _context.Songs.FirstOrDefaultAsync(s => s.Name == song.Name);
+            var songEntity = await _context.Songs.FindAsync(id);
             if (songEntity != null && album != null)
             {
                 _mapper.Map(song, songEntity);
@@ -72,7 +72,7 @@ namespace MusicWebAPI.Services
                 await _context.SaveChangesAsync();
                 return _mapper.Map<Song>(songEntity);
             }
-            return null!;
+            throw new KeyNotFoundException($"Tyvärr, vi kunde inte hitta sången med Id nummer {id}, så vi kunde inte uppdatera den."); 
         }
 
 
@@ -85,9 +85,8 @@ namespace MusicWebAPI.Services
                 await _context.SaveChangesAsync();
                 return _mapper.Map<Song>(songDelete);
             }
-                
 
-            return null!;
+            throw new KeyNotFoundException($"Tyvärr, vi kunde inte hitta sången med Id nummer {id} så vi kunde inte ta bort den.");
         }
     }
 }

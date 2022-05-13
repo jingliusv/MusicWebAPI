@@ -37,7 +37,7 @@ namespace MusicWebAPI.Services
                 await _context.SaveChangesAsync();
                 return _mapper.Map<Album>(albumCreate);
             }
-            return null!;
+            throw new ApplicationException("Det finns ett album som har samma namn");
         }
 
         public async Task<Album> DeleteAsync(int id)
@@ -49,13 +49,10 @@ namespace MusicWebAPI.Services
                 await _context.SaveChangesAsync();
                 return _mapper.Map<Album>(albumDelete);
             }
-            return null!;
+            throw new KeyNotFoundException($"Tyvärr, vi kunde inte hitta albumet med Id nummer {id} så vi kunde ínte ta bort det.");
         }
 
-        public async Task<IEnumerable<AlbumDto>> GetAllAsync()
-        {
-            return _mapper.Map<IEnumerable<AlbumDto>>(await _context.Albums.Include(a => a.Artist).ThenInclude(a => a.Songs).ToListAsync());
-        }
+        public async Task<IEnumerable<AlbumDto>> GetAllAsync() => _mapper.Map<IEnumerable<AlbumDto>>(await _context.Albums.Include(a => a.Artist).ThenInclude(a => a.Songs).ToListAsync());
 
         public async Task<AlbumDto> GetByIdAsync(int id)
         {
@@ -65,9 +62,9 @@ namespace MusicWebAPI.Services
                 .Where(a => a.Id == id)
                 .FirstOrDefaultAsync();
             if(albumEntity != null)
-                return _mapper.Map<AlbumDto>(albumEntity);             
+                return _mapper.Map<AlbumDto>(albumEntity);
 
-            return null!;
+            throw new KeyNotFoundException($"Tyvärr, vi kunde inte hitta albumet med Id nummer {id}.");
         }
 
         public async Task<AlbumDto> UpdateAsync(int id, AlbumForm album)
@@ -79,7 +76,7 @@ namespace MusicWebAPI.Services
                 await _context.SaveChangesAsync();
                 return _mapper.Map<AlbumDto>(albumUpdate);
             }
-            return null!;
+            throw new KeyNotFoundException($"Tyvärr, vi kunde inte hitta albumet med Id nummer {id} så vi kunde inte uppdatera det."); 
         }
     }
 }

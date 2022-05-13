@@ -6,6 +6,7 @@ global using MusicWebAPI.Services;
 global using Microsoft.EntityFrameworkCore;
 global using AutoMapper;
 using MusicWebAPI.Data;
+using MusicWebAPI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +38,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 

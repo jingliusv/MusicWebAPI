@@ -25,7 +25,7 @@ namespace MusicWebAPI.Services
         public async Task<Artist> CreateAsync(ArtistForm artist)
         {
             // kolla om artist finns
-            var artistEntity = await GetByNameAsync(artist.Name);
+            var artistEntity = await _context.Artists.FirstOrDefaultAsync(a => a.Name.ToLower() == artist.Name.ToLower());
             // om det inte finns så skapar vi en
             if(artistEntity == null)
             {
@@ -34,7 +34,7 @@ namespace MusicWebAPI.Services
                 await _context.SaveChangesAsync();
                 return _mapper.Map<Artist>(createArtist);
             }
-            return null!;
+            throw new ApplicationException("Det finns en artist som har samma namn.");
         }
 
         public async Task<Artist> DeleteAsync(int id)
@@ -46,32 +46,32 @@ namespace MusicWebAPI.Services
                 await _context.SaveChangesAsync();
                 return _mapper.Map<Artist>(deleteArtist);
             }
-            return null!;
+            throw new KeyNotFoundException("Tyvärr, vi hittar inte artisten som du vill ta bort.");
         }
 
         public async Task<IEnumerable<ArtistDto>> GetAllAsync()
         {
             return _mapper.Map<IEnumerable<ArtistDto>>(await _context.Artists
                 .Include(a => a.Albums)
-                .ToListAsync());
+                .ToListAsync()); 
         }
 
         public async Task<ArtistDto> GetByIdAsync(int id)
         {           
             var artistEntity = await _context.Artists.Include(a => a.Albums).Where(a => a.Id == id).FirstOrDefaultAsync(a => a.Id == id); ;
-            if (artistEntity != null)
-                return _mapper.Map<ArtistDto>(artistEntity);
+            if (artistEntity == null)
+                throw new KeyNotFoundException($"Tyvärr, vi kunde inte hitta artisten med Id nummer {id}.");
 
-            return null!;
+            return _mapper.Map<ArtistDto>(artistEntity);
         }
 
         public async Task<ArtistDto> GetByNameAsync(string name)
         {
             var artistEntity = await _context.Artists.Include(a => a.Albums).Where(a => a.Name == name).FirstOrDefaultAsync(a => a.Name.ToLower() == name.ToLower());
-            if (artistEntity != null)
-                return _mapper.Map<ArtistDto>(artistEntity);
-
-            return null!;
+            if (artistEntity == null)
+                throw new KeyNotFoundException($"Tyvärr, vi kunde inte hitta artisten med namn {name}.");
+         
+            return _mapper.Map<ArtistDto>(artistEntity);
         }
 
         public async Task<Artist> UpdateAsync(int id, ArtistForm artist)
@@ -83,7 +83,7 @@ namespace MusicWebAPI.Services
                 await _context.SaveChangesAsync();
                 return _mapper.Map<Artist>(artistUpdated);
             }
-            return null!;
+            throw new KeyNotFoundException($"Tyvärr, vi kunde inte uppdatera artisten med Id nummer {id}.");
         }
     }
 }
