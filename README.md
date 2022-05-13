@@ -13,6 +13,7 @@ Ett Web-API som hanterar ett musikbibliotek. Det ska finnas funktionalitet för 
 * När man skapar en ny artist, så ska endast artistnamn skickas in, och ett objekt med namnet och det tilldelade ID’et skickas tillbaka.
 * När man skapar ett nytt album, så ska endast albumnamn och artist-ID skickas in, och ett objekt med albumnamn och det tilldelade ID’et skickas tillbaka.
 * När man skapar en ny sång, så ska endast sångnamn, längd och album-ID skickas in, och ett objekt med sångnamn och det tilldelade ID’et skickas tillbaka. 
+<br/>
 
 * När man hämtar ut en artist via API så ska artistens ID och namn, och en lista på samtliga album-namn och deras IDn hämtas ut returneras som svar.
 * När man hämtar ut ett album via API så ska albumets ID och namn, artistens namn och ID, och en lista över samtliga låt-namn och deras IDn returneras.
