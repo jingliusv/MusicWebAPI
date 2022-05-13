@@ -17,47 +17,82 @@ namespace MusicWebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Album>> CreateAlbum(AlbumForm album)
         {
-            var createdAlbum = await _albumService.CreateAsync(album);
-            if(createdAlbum != null)
-                return Ok(createdAlbum);
+            try
+            {
+                var createdAlbum = await _albumService.CreateAsync(album);
+                if (createdAlbum != null)
+                    return Ok(createdAlbum);
 
-            return BadRequest();
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<AlbumEntity>> GetAlbumById(int id)
         {
-            var album = await _albumService.GetByIdAsync(id);
-            if (album != null)
-                return Ok(album);
+            try
+            {
+                var album = await _albumService.GetByIdAsync(id);
+                if (album != null)
+                    return Ok(album);
 
-            return NotFound("Tyvärr, vi hittar inte det albumet som du sökt.");
+                return NotFound("Tyvärr, vi hittar inte det albumet som du sökt.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AlbumDto>>> GetAllAlbums()
         {
-            return Ok(await _albumService.GetAllAsync());
+            try
+            {
+                return Ok(await _albumService.GetAllAsync());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<AlbumDto>> UpdateAlbum(int id, AlbumForm album)
         {
-            var updatedAlbum = await _albumService.UpdateAsync(id, album);
-            if(updatedAlbum != null)
-                return Ok(updatedAlbum);
+            try
+            {
+                var updatedAlbum = await _albumService.UpdateAsync(id, album);
+                if (updatedAlbum != null)
+                    return Ok(updatedAlbum);
 
-            return BadRequest("Nogot gick felt och vi kunde inte uppdatera albumet.");
+                return BadRequest("Nogot gick felt och vi kunde inte uppdatera albumet.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<Album>> DeleteAlbum(int id)
         {
-            var deletedAlbum = await _albumService.DeleteAsync(id);
-            if(deletedAlbum != null)
-                return Ok(deletedAlbum);
+            try
+            {
+                var deletedAlbum = await _albumService.DeleteAsync(id);
+                if (deletedAlbum != null)
+                    return Ok(deletedAlbum);
 
-            return NotFound("Tyvärr, vi kunde inte hitta albumet som du vill ta bort.");
+                return NotFound("Tyvärr, vi kunde inte hitta albumet som du vill ta bort.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

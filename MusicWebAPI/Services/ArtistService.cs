@@ -7,7 +7,7 @@ namespace MusicWebAPI.Services
         Task<Artist> CreateAsync(ArtistForm artist);
         Task<ArtistDto> GetByNameAsync(string name);
         Task<ArtistDto> GetByIdAsync(int id);
-        Task<IEnumerable<ArtistEntity>> GetAllAsync();
+        Task<IEnumerable<ArtistDto>> GetAllAsync();
         Task<Artist> UpdateAsync(int id, ArtistForm artist);
         Task<Artist> DeleteAsync(int id);
     }
@@ -49,11 +49,11 @@ namespace MusicWebAPI.Services
             return null!;
         }
 
-        public async Task<IEnumerable<ArtistEntity>> GetAllAsync()
+        public async Task<IEnumerable<ArtistDto>> GetAllAsync()
         {
-            return await _context.Artists
+            return _mapper.Map<IEnumerable<ArtistDto>>(await _context.Artists
                 .Include(a => a.Albums)
-                .ToListAsync();
+                .ToListAsync());
         }
 
         public async Task<ArtistDto> GetByIdAsync(int id)

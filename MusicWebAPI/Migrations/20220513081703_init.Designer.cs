@@ -11,8 +11,8 @@ using MusicWebAPI.Data;
 namespace MusicWebAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220505105733_more Seeding data")]
-    partial class moreSeedingdata
+    [Migration("20220513081703_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -85,13 +85,13 @@ namespace MusicWebAPI.Migrations
                         {
                             Id = 7,
                             ArtistId = 4,
-                            Name = "cure"
+                            Name = "When I Look in Your Eyes"
                         },
                         new
                         {
                             Id = 8,
                             ArtistId = 2,
-                            Name = "Dancing on My Own"
+                            Name = "Body Talk"
                         },
                         new
                         {
@@ -136,7 +136,7 @@ namespace MusicWebAPI.Migrations
                         new
                         {
                             Id = 4,
-                            Name = "SIRUP"
+                            Name = "Diana Krall"
                         },
                         new
                         {
@@ -179,7 +179,7 @@ namespace MusicWebAPI.Migrations
                         new
                         {
                             Id = 1,
-                            AlbumId = 4,
+                            AlbumId = 1,
                             ArtistId = 1,
                             Length = "3:09",
                             Name = "Memories"
@@ -187,7 +187,7 @@ namespace MusicWebAPI.Migrations
                         new
                         {
                             Id = 2,
-                            AlbumId = 4,
+                            AlbumId = 1,
                             ArtistId = 1,
                             Length = "2:52",
                             Name = "Lost"
@@ -215,6 +215,102 @@ namespace MusicWebAPI.Migrations
                             ArtistId = 5,
                             Length = "4:48",
                             Name = "Boogie Wonderland"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AlbumId = 7,
+                            ArtistId = 4,
+                            Length = "5:18",
+                            Name = "Let's Face the Music and Dance"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AlbumId = 7,
+                            ArtistId = 4,
+                            Length = "6:10",
+                            Name = "I've Got You Under My Skin"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AlbumId = 3,
+                            ArtistId = 2,
+                            Length = "4:34",
+                            Name = "Because It's In The Music"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AlbumId = 8,
+                            ArtistId = 2,
+                            Length = "4:48",
+                            Name = "Dancing on My Own"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AlbumId = 3,
+                            ArtistId = 2,
+                            Length = "4:57",
+                            Name = "Missing U"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            AlbumId = 2,
+                            ArtistId = 1,
+                            Length = "3:59",
+                            Name = "Best 4 U"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            AlbumId = 2,
+                            ArtistId = 1,
+                            Length = "3:19",
+                            Name = "What Lovers Do"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            AlbumId = 9,
+                            ArtistId = 5,
+                            Length = "5:39",
+                            Name = "Let's Groove"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            AlbumId = 9,
+                            ArtistId = 5,
+                            Length = "3:35",
+                            Name = "September"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            AlbumId = 5,
+                            ArtistId = 1,
+                            Length = "3:09",
+                            Name = "Maps"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            AlbumId = 5,
+                            ArtistId = 1,
+                            Length = "3:55",
+                            Name = "Sugar"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            AlbumId = 5,
+                            ArtistId = 1,
+                            Length = "4:27",
+                            Name = "Lost Stars"
                         });
                 });
 
@@ -234,7 +330,7 @@ namespace MusicWebAPI.Migrations
                     b.HasOne("MusicClassLibrary.Entities.AlbumEntity", "Album")
                         .WithMany("Songs")
                         .HasForeignKey("AlbumId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MusicClassLibrary.Entities.ArtistEntity", "Artist")

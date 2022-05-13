@@ -17,57 +17,100 @@ namespace MusicWebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Artist>> CreateArtist(ArtistForm artist)
         {
-            var artistCreated = await _artistService.CreateAsync(artist);
-            if (artistCreated != null)
-                return Ok(artistCreated);
+            try
+            {
+                var artistCreated = await _artistService.CreateAsync(artist);
+                if (artistCreated != null)
+                    return Ok(artistCreated);
 
-            return BadRequest();
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Artist>> GetArtistById(int id)
         {
-            var artistFound = await _artistService.GetByIdAsync(id);
-            if(artistFound != null)
-                return Ok(artistFound);
+            try
+            {
+                var artistFound = await _artistService.GetByIdAsync(id);
+                if (artistFound != null)
+                    return Ok(artistFound);
 
-            return NotFound("Tyvärr, vi hittar inte artisten som du sökt.");
+                return NotFound("Tyvärr, vi hittar inte artisten som du sökt.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet("artist/{name}")]
         public async Task<ActionResult<Artist>> GetArtistByName(string name)
         {
-            var artistFound = await _artistService.GetByNameAsync(name);
-            if (artistFound != null)
-                return Ok(artistFound);
+            try
+            {
+                var artistFound = await _artistService.GetByNameAsync(name);
+                if (artistFound != null)
+                    return Ok(artistFound);
 
-            return NotFound("Tyvärr, vi hittar inte artisten som du sökt.");
+                return NotFound("Tyvärr, vi hittar inte artisten som du sökt.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Artist>>> GetArtists()
+        public async Task<ActionResult<IEnumerable<ArtistDto>>> GetAllArtists()
         {
-            return Ok(await _artistService.GetAllAsync());
+            try
+            {
+                return Ok(await _artistService.GetAllAsync());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<Artist>> UpdateArtist(int id, ArtistForm artist)
         {
-            var updatedArtist = await _artistService.UpdateAsync(id, artist);
-            if (updatedArtist != null)
-                return Ok(updatedArtist);
+            try
+            {
+                var updatedArtist = await _artistService.UpdateAsync(id, artist);
+                if (updatedArtist != null)
+                    return Ok(updatedArtist);
 
-            return NotFound("Tyvärr, vi hittar inte artisten som du vill uppdatera.");
+                return NotFound("Tyvärr, vi hittar inte artisten som du vill uppdatera.");
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<Artist>> DeleteArtist(int id)
         {
-            var deletedArtist = await _artistService.DeleteAsync(id);
-            if (deletedArtist != null)
-                return Ok(deletedArtist);
+            try
+            {
+                var deletedArtist = await _artistService.DeleteAsync(id);
+                if (deletedArtist != null)
+                    return Ok(deletedArtist);
 
-            return NotFound("Tyvärr, vi hittar inte artisten som du vill ta bort.");
+                return NotFound("Tyvärr, vi hittar inte artisten som du vill ta bort.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

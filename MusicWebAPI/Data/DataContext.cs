@@ -16,7 +16,7 @@
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // SongEntity har två FK Key
+            // SongEntity har två FK nyklar
             modelBuilder.Entity<SongEntity>()
               .HasOne(x => x.Artist)
               .WithMany(x => x.Songs)
@@ -27,7 +27,7 @@
                 .HasOne(x => x.Album)
                 .WithMany(x => x.Songs)
                 .HasForeignKey(x => x.AlbumId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
            
             #region Artist Data
@@ -50,7 +50,7 @@
                 new ArtistEntity 
                 { 
                     Id = 4, 
-                    Name = "SIRUP"
+                    Name = "Diana Krall"
                 },
                 new ArtistEntity
                 {
@@ -102,13 +102,13 @@
                 new AlbumEntity
                 {
                     Id = 7,
-                    Name = "cure",
+                    Name = "When I Look in Your Eyes",
                     ArtistId = 4
                 },
                 new AlbumEntity
                 {
                     Id = 8,
-                    Name = "Dancing on My Own",
+                    Name = "Body Talk",
                     ArtistId = 2
                 },
                 new AlbumEntity
@@ -127,7 +127,7 @@
                     Id = 1,
                     Name = "Memories",
                     Length = "3:09",
-                    AlbumId = 4,
+                    AlbumId = 1,
                     ArtistId = 1
                 },
                 new SongEntity
@@ -135,7 +135,7 @@
                     Id = 2,
                     Name = "Lost",
                     Length = "2:52",
-                    AlbumId = 4,
+                    AlbumId = 1,
                     ArtistId = 1
                 },
                 new SongEntity
@@ -161,6 +161,102 @@
                     Length = "4:48",
                     AlbumId = 1,
                     ArtistId = 5
+                },
+                new SongEntity
+                {
+                    Id = 6,
+                    Name = "Let's Face the Music and Dance",
+                    Length = "5:18",
+                    AlbumId = 7,
+                    ArtistId = 4
+                },
+                new SongEntity
+                {
+                    Id = 7,
+                    Name = "I've Got You Under My Skin",
+                    Length = "6:10",
+                    AlbumId = 7,
+                    ArtistId = 4
+                },
+                new SongEntity
+                {
+                    Id = 8,
+                    Name = "Because It's In The Music",
+                    Length = "4:34",
+                    AlbumId = 3,
+                    ArtistId = 2
+                },
+                new SongEntity
+                {
+                    Id = 9,
+                    Name = "Dancing on My Own",
+                    Length = "4:48",
+                    AlbumId = 8,
+                    ArtistId = 2
+                },
+                new SongEntity
+                {
+                    Id = 10,
+                    Name = "Missing U",
+                    Length = "4:57",
+                    AlbumId = 3,
+                    ArtistId = 2
+                },
+                new SongEntity
+                {
+                    Id = 11,
+                    Name = "Best 4 U",
+                    Length = "3:59",
+                    AlbumId = 2,
+                    ArtistId = 1
+                },
+                new SongEntity
+                {
+                    Id = 12,
+                    Name = "What Lovers Do",
+                    Length = "3:19",
+                    AlbumId = 2,
+                    ArtistId = 1
+                },
+                new SongEntity
+                {
+                    Id = 13,
+                    Name = "Let's Groove",
+                    Length = "5:39",
+                    AlbumId = 9,
+                    ArtistId = 5
+                },
+                new SongEntity
+                {
+                    Id = 14,
+                    Name = "September",
+                    Length = "3:35",
+                    AlbumId = 9,
+                    ArtistId = 5
+                },
+                new SongEntity
+                {
+                    Id = 15,
+                    Name = "Maps",
+                    Length = "3:09",
+                    AlbumId = 5,
+                    ArtistId = 1
+                },
+                new SongEntity
+                {
+                    Id = 16,
+                    Name = "Sugar",
+                    Length = "3:55",
+                    AlbumId = 5,
+                    ArtistId = 1
+                },
+                new SongEntity
+                {
+                    Id = 17,
+                    Name = "Lost Stars",
+                    Length = "4:27",
+                    AlbumId = 5,
+                    ArtistId = 1
                 }
             );
             #endregion
